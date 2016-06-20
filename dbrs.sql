@@ -103,7 +103,7 @@ CREATE TABLE `empresa_cliente` (
   `nombre` varchar(150) NOT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `correo` varchar(50) DEFAULT NULL,
-  `status` bit(1) DEFAULT NULL
+  `status` varchar(1) DEFAULT "0"
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -111,8 +111,8 @@ CREATE TABLE `empresa_cliente` (
 --
 
 INSERT INTO `empresa_cliente` (`empresa_id`, `nombre`, `telefono`, `correo`, `status`) VALUES
-(1, 'S.A de C.V.', '7471222313', 'sucorreo|@g.com', NULL),
-(2, 'S.A. de R.L.', '7471222314', 'sucorreo2@g.com', NULL),
+(1, 'S.A de C.V.', '7471222313', 'sucorreo|@g.com', 1),
+(2, 'S.A. de R.L.', '7471222314', 'sucorreo2@g.com', 1),
 (3, 'Mi Institute', '1-364-837-7778', 'egestas.Duis@massaSuspendisseeleifend.com', b'1'),
 (4, 'Natoque Penatibus Company', '1-628-458-3862', 'sagittis.lobortis.mauris@pedeSuspendissedui.com', b'0'),
 (5, 'Nunc Sit Company', '1-881-485-8366', 'et.nunc@luctuslobortisClass.com', b'0'),
@@ -174,7 +174,7 @@ CREATE TABLE `gps` (
   `gps_id` int(11) NOT NULL,
   `imei` varchar(100) DEFAULT NULL,
   `numero` varchar(25) NOT NULL,
-  `descripcion` varchar(250) DEFAULT NULL,
+  `descripcion` varchar(250) NOT NULL,
   `empresa_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
