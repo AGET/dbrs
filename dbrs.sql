@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-06-2016 a las 02:41:17
+-- Tiempo de generación: 20-06-2016 a las 05:52:02
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.21
 
@@ -124,6 +124,17 @@ INSERT INTO `empresa_cliente` (`empresa_id`, `nombre`, `telefono`, `correo`, `st
 (11, 'Ut Nisi A Foundation', '1-673-383-0528', 'Cras@Proinnon.co.uk', b'1'),
 (12, 'Rhoncus Donec Est PC', '1-612-849-9718', 'ornare@leo.com', b'0');
 
+--
+-- Disparadores `empresa_cliente`
+--
+DELIMITER $$
+CREATE TRIGGER `eliminarEmpresa_BD_TRIGGER` BEFORE DELETE ON `empresa_cliente` FOR EACH ROW BEGIN
+DELETE FROM usuarios WHERE usuarios.empresa_id = OLD.empresa_id;
+DELETE FROM gps WHERE gps.empresa_id = OLD.empresa_id;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -141,17 +152,17 @@ CREATE TABLE `enlace` (
 --
 
 INSERT INTO `enlace` (`enlace_id`, `usuario_id`, `gps_id`) VALUES
-(12, 1, 1),
-(13, 2, 1),
-(14, 3, 1),
-(15, 1, 3),
-(16, 2, 3),
-(17, 3, 1),
-(18, 4, 1),
-(19, 5, 1),
-(20, 6, 1),
-(21, 7, 1),
-(22, 5, 3);
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1),
+(4, 1, 3),
+(5, 2, 3),
+(6, 3, 1),
+(7, 4, 1),
+(8, 5, 1),
+(9, 6, 1),
+(10, 7, 1),
+(11, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -195,6 +206,13 @@ CREATE TRIGGER `bajaGpsDeEmpresa_BU_TRIGGER` BEFORE UPDATE ON `gps` FOR EACH ROW
  DELETE FROM detalle WHERE detalle.gps_id = OLD.gps_id;
  END IF;
  END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `eliminarGps_BD_TRIGGER` BEFORE DELETE ON `gps` FOR EACH ROW BEGIN
+DELETE FROM enlace WHERE enlace.gps_id = OLD.gps_id;
+DELETE FROM detalle WHERE detalle.gps_id = OLD.gps_id;
+END
 $$
 DELIMITER ;
 
@@ -326,7 +344,7 @@ ALTER TABLE `empresa_cliente`
 -- AUTO_INCREMENT de la tabla `enlace`
 --
 ALTER TABLE `enlace`
-  MODIFY `enlace_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `enlace_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `gps`
 --
