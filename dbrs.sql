@@ -113,16 +113,16 @@ CREATE TABLE `empresa_cliente` (
 INSERT INTO `empresa_cliente` (`empresa_id`, `nombre`, `telefono`, `correo`, `status`) VALUES
 (1, 'S.A de C.V.', '7471222313', 'sucorreo|@g.com', 1),
 (2, 'S.A. de R.L.', '7471222314', 'sucorreo2@g.com', 1),
-(3, 'Mi Institute', '1-364-837-7778', 'egestas.Duis@massaSuspendisseeleifend.com', b'1'),
-(4, 'Natoque Penatibus Company', '1-628-458-3862', 'sagittis.lobortis.mauris@pedeSuspendissedui.com', b'0'),
-(5, 'Nunc Sit Company', '1-881-485-8366', 'et.nunc@luctuslobortisClass.com', b'0'),
-(6, 'In Corp.', '1-197-862-1603', 'lacus.Etiam.bibendum@Curae.org', b'1'),
-(7, 'Cursus Nunc Institute', '1-987-833-4224', 'et@quamelementumat.net', b'0'),
-(8, 'Vulputate Limited', '1-490-342-2320', 'Sed@aliquam.com', b'0'),
-(9, 'Lorem Ut Aliquam Corp.', '1-900-646-7405', 'Maecenas.libero.est@laoreet.co.uk', b'0'),
-(10, 'Eros Nam Consequat Limited', '1-139-540-8633', 'posuere.cubilia@sitamet.ca', b'1'),
-(11, 'Ut Nisi A Foundation', '1-673-383-0528', 'Cras@Proinnon.co.uk', b'1'),
-(12, 'Rhoncus Donec Est PC', '1-612-849-9718', 'ornare@leo.com', b'0');
+(3, 'Mi Institute', '1-364-837-7778', 'egestas.Duis@massaSuspendisseeleifend.com', '1'),
+(4, 'Natoque Penatibus Company', '1-628-458-3862', 'sagittis.lobortis.mauris@pedeSuspendissedui.com', '0'),
+(5, 'Nunc Sit Company', '1-881-485-8366', 'et.nunc@luctuslobortisClass.com', '0'),
+(6, 'In Corp.', '1-197-862-1603', 'lacus.Etiam.bibendum@Curae.org', '1'),
+(7, 'Cursus Nunc Institute', '1-987-833-4224', 'et@quamelementumat.net', '0'),
+(8, 'Vulputate Limited', '1-490-342-2320', 'Sed@aliquam.com', '0'),
+(9, 'Lorem Ut Aliquam Corp.', '1-900-646-7405', 'Maecenas.libero.est@laoreet.co.uk', '0'),
+(10, 'Eros Nam Consequat Limited', '1-139-540-8633', 'posuere.cubilia@sitamet.ca', '1'),
+(11, 'Ut Nisi A Foundation', '1-673-383-0528', 'Cras@Proinnon.co.uk', '1'),
+(12, 'Rhoncus Donec Est PC', '1-612-849-9718', 'ornare@leo.com', '0');
 
 --
 -- Disparadores `empresa_cliente`
