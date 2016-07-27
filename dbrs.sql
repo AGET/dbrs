@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-07-2016 a las 13:46:14
+-- Tiempo de generación: 28-07-2016 a las 01:18:09
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -71,8 +71,8 @@ INSERT INTO `coordenadas` (`coordenadas_id`, `longitud`, `latitud`, `detalle_id`
 CREATE TABLE `departamento` (
   `departamento_id` int(11) NOT NULL,
   `nombre` varchar(250) NOT NULL,
-  `telefono` varchar(25),
-  `correo` varchar(50),
+  `telefono` varchar(25) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT NULL,
   `direccion` varchar(500) DEFAULT NULL,
   `empresa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -236,6 +236,7 @@ CREATE TABLE `gps` (
   `imei` varchar(100) DEFAULT NULL,
   `numero` varchar(25) NOT NULL,
   `descripcion` varchar(250) NOT NULL,
+  `autorastreo` varchar(50) DEFAULT 'nofix' COMMENT 'este campo sera llenado con la informacion que se requiere para poder rastrear el dispositivo cada cierto tiempo y en ciertas cantidades\nfix030s5n+password\nnofix+password',
   `departamento_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -243,19 +244,19 @@ CREATE TABLE `gps` (
 -- Volcado de datos para la tabla `gps`
 --
 
-INSERT INTO `gps` (`gps_id`, `imei`, `numero`, `descripcion`, `departamento_id`) VALUES
-(1, '000000000000000', '7471212313', 'un gps', 1),
-(2, '100184351997449', '1-312-795-4469', 'dolor sit amet, consectetuer', 2),
-(3, '111111111111111', '7471212314', 'otro gps', 1),
-(4, '216950486740097', '1-621-355-8159', 'libero lacus, varius et,', 2),
-(5, '568026148201897', '1-257-608-0553', 'dis parturient montes, nascetur', 1),
-(6, '644554683938622', '1-665-503-4628', 'ornare egestas ligula. Nullam', 2),
-(7, '812124402588233', '1-980-983-6980', 'dui. Fusce diam nunc,', 1),
-(8, '908258133567869', '1-331-377-7778', 'Cras vehicula aliquet libero.', 2),
-(9, '909181318059563', '1-449-475-1736', 'mauris, rhoncus id, mollis', 1),
-(10, '932643502624705', '1-276-933-4170', 'Phasellus at augue id', 2),
-(11, '961823153914883', '1-411-695-8780', 'eget, volutpat ornare, facilisis', 1),
-(12, '974630529293790', '1-745-248-3465', 'a tortor. Nunc commodo', 2);
+INSERT INTO `gps` (`gps_id`, `imei`, `numero`, `descripcion`, `autorastreo`, `departamento_id`) VALUES
+(1, '000000000000000', '7471212313', 'un gps', 'nofix', 1),
+(2, '100184351997449', '1-312-795-4469', 'dolor sit amet, consectetuer', 'nofix', 2),
+(3, '111111111111111', '7471212314', 'otro gps', 'nofix', 1),
+(4, '216950486740097', '1-621-355-8159', 'libero lacus, varius et,', 'nofix', 2),
+(5, '568026148201897', '1-257-608-0553', 'dis parturient montes, nascetur', 'nofix', 1),
+(6, '644554683938622', '1-665-503-4628', 'ornare egestas ligula. Nullam', 'nofix', 2),
+(7, '812124402588233', '1-980-983-6980', 'dui. Fusce diam nunc,', 'nofix', 1),
+(8, '908258133567869', '1-331-377-7778', 'Cras vehicula aliquet libero.', 'nofix', 2),
+(9, '909181318059563', '1-449-475-1736', 'mauris, rhoncus id, mollis', 'nofix', 1),
+(10, '932643502624705', '1-276-933-4170', 'Phasellus at augue id', 'nofix', 2),
+(11, '961823153914883', '1-411-695-8780', 'eget, volutpat ornare, facilisis', 'nofix', 1),
+(12, '974630529293790', '1-745-248-3465', 'a tortor. Nunc commodo', 'nofix', 2);
 
 --
 -- Disparadores `gps`
