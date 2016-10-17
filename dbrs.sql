@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `administrador_sistema` (
   `ap_materno` varchar(150) DEFAULT NULL,
   `telefono` varchar(20) NOT NULL,
   `correo` varchar(150) NOT NULL,
-  `contrase_na` varchar(200) NOT NULL
+  `contrase_na` varchar(200) NOT NULL DEFAULT '123'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -311,7 +311,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `ap_materno` varchar(150) DEFAULT NULL,
   `telefono` varchar(20) NOT NULL,
   `correo` varchar(150) NOT NULL,
-  `contrase_na` varchar(200) NOT NULL,
+  `contrase_na` varchar(200) NOT NULL DEFAULT '123',
   `departamento_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -319,19 +319,19 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`usuario_id`, `nombre`, `ap_paterno`, `ap_materno`, `telefono`, `correo`, `usuario`, `contrase_na`, `departamento_id`) VALUES
-(1, 'Aldo', 'Estrada', 'Tepec', '4711956', 'aldo_get@hotmail.com', 'aget', '123', 1),
-(2, 'william', 'est', 'tep', '4711957', 'alas_bet@hotmail.com', 'wito', '123', 2),
-(3, 'Adele', 'Clarke', 'Hopper', '1-509-878-3332', 'amet.lorem@ipsum.co.uk', 'ornare,', '6299', 17),
-(4, 'Thor', 'Lang', 'Farrell', '1-858-526-7878', 'ut.sem@sit.com', 'mauris.', '3968', 12),
-(5, 'Kendall', 'Weiss', 'Pace', '1-579-681-0940', 'ipsum.leo@tellus.ca', 'egestas.', '9977', 7),
-(6, 'Fiona', 'Franklin', 'Boyd', '1-750-817-0628', 'pede.sagittis@vitae.com', 'auctor', '2760', 10),
-(7, 'Alexis', 'Bruce', 'Mcdaniel', '1-285-735-4142', 'gravida.Praesent.eu@rutrummagnaCras.co.uk', 'diam', '7455', 19),
-(8, 'Phillip', 'Stout', 'Riddle', '1-634-150-2212', 'mollis.dui@placerat.net', 'eu', '3222', 11),
-(9, 'Preston', 'Mays', 'Buck', '1-795-423-5856', 'urna.Nunc.quis@vel.net', 'tincidunt', '3413', 9),
-(10, 'Aileen', 'Medina', 'Mcguire', '1-379-179-0856', 'Proin.sed@Aliquamgravidamauris.co.uk', 'arcu.', '9998', 1),
-(11, 'Raymond', 'Huff', 'Livingston', '1-543-276-7583', 'nec@a.net', 'elit', '5266', 3),
-(12, 'Elmo', 'Walls', 'Russell', '1-517-531-0915', 'condimentum.Donec.at@musDonecdignissim.edu', 'mauris', '1980', 18);
+INSERT INTO `usuarios` (`usuario_id`, `nombre`, `ap_paterno`, `ap_materno`, `telefono`, `correo`, `contrase_na`, `departamento_id`) VALUES
+(1, 'ruben',      'dario',    'osorio',     '7471159955',     'rdo@gmail.com',        '123',  1),
+(2, 'Juan ',      'bvcc',     'gcg',        '47916678',       'usee@hotmail.com',     '123',  2),
+(3, 'Elizabeth',  'Rojo',     'Garcia',     '7471111984',     'eli_rg@gmail.com',     '123',  17),
+(4, 'Alexis',     'Bruce',    'Mcdaniel',   '1-285-735-4142', 'gravida@hotmail.com',  '7455', 12),
+(5, 'Phillip',    'Stout',    'Riddle',     '1-634-150-2212', 'mollis@placerat.net',  '3222', 7),
+(6, 'Preston',    'Mays',     'Buck',       '1-795-423-5856', 'urna.quis@vel.net',    '3413', 10),
+(7, 'Raymond',    'Huff',     'Livingston', '1-543-276-7583', 'nec@a.net',            '5266', 19),
+(8, 'Eliseo',     'moso',     'Tepetate',   '0987654321',     'eliseo@gmail.com',     '123',  11),
+(9, 'Aldo',       'Estrada',  'Tepec',      '7471212313',     'aldo_get@hotmail.com', '123',  9),
+(10,'Jose Abel',  'Macario',  'Hernandez',  '747 2389 541',   'jamh@gmail.com',       '123',  1),
+(11, 'Raymond',   'Huff',     'Livingston', '1-543-276-7583', 'nec@a.net',            '5266', 3),
+(12, 'Elmo',      'Walls',    'Russell',    '1-517-531-0915', 'condiment@gmail.com',  '1980', 18);
 
 --
 -- Disparadores `usuarios`
