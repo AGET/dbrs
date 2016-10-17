@@ -19,33 +19,26 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `dbrs`
 --
+/*
 CREATE DATABASE IF NOT EXISTS `dbrs` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `dbrs`;
+*/
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `administrador_sistema`
 --
-DROP TABLE IF EXISTS `administrador_sistema`;
-CREATE TABLE IF NOT EXISTS `administrador_sistema` (
+
+CREATE TABLE `administrador_sistema` (
   `administrador_id` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
   `ap_paterno` varchar(150) DEFAULT NULL,
   `ap_materno` varchar(150) DEFAULT NULL,
-  `telefono` varchar(20) NOT NULL,
   `correo` varchar(150) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
   `contrase_na` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Volcado de datos para la tabla `administrador_sistema`
---
-
-INSERT INTO `administrador_sistema` (`administrador_id`, `nombre`, `ap_paterno`, `ap_materno`, `telefono`, `correo`, `contrase_na`) VALUES
-(1, 'Luis', 'Osorio ', 'Guzman ', '7471747535', 'telefoniadigital2000@hotmail.com', '123');
 
 -- --------------------------------------------------------
 
@@ -53,8 +46,7 @@ INSERT INTO `administrador_sistema` (`administrador_id`, `nombre`, `ap_paterno`,
 -- Estructura de tabla para la tabla `coordenadas`
 --
 
-DROP TABLE IF EXISTS `coordenadas`;
-CREATE TABLE IF NOT EXISTS `coordenadas` (
+CREATE TABLE `coordenadas` (
   `coordenadas_id` int(11) NOT NULL,
   `longitud` double NOT NULL,
   `latitud` double NOT NULL,
@@ -66,13 +58,11 @@ CREATE TABLE IF NOT EXISTS `coordenadas` (
 --
 
 INSERT INTO `coordenadas` (`coordenadas_id`, `longitud`, `latitud`, `detalle_id`) VALUES
-(1, -99.47651,   17.545718, 1),
-(2, -99.498312,  17.530838, 2),
-(3, -99.523407,  17.556618, 3),
-(4, -99.523372,  17.556522, 4),
-(5, -99.5243413, 17.556563, 5),
-(6, -99.529908,  17.51449,  5),
-(7, -99.583287,  17.526627, 7);
+(1, 56456, 321231, 1),
+(2, 564546, 564654, 1),
+(3, 564546, 564564, 2),
+(4, 545454543, 5546645546, 2),
+(5, 5465656, 231231, 2);
 
 -- --------------------------------------------------------
 
@@ -80,8 +70,7 @@ INSERT INTO `coordenadas` (`coordenadas_id`, `longitud`, `latitud`, `detalle_id`
 -- Estructura de tabla para la tabla `departamento`
 --
 
-DROP TABLE IF EXISTS `departamento`;
-CREATE TABLE IF NOT EXISTS `departamento` (
+CREATE TABLE `departamento` (
   `departamento_id` int(11) NOT NULL,
   `nombre` varchar(250) NOT NULL,
   `telefono` varchar(25) DEFAULT NULL,
@@ -119,11 +108,9 @@ INSERT INTO `departamento` (`departamento_id`, `nombre`, `telefono`, `correo`, `
 --
 -- Disparadores `departamento`
 --
-DROP TRIGGER IF EXISTS `eliminarDepartamento_BD_TRIGGER`;
 DELIMITER $$
-CREATE TRIGGER `eliminarDepartamento_BD_TRIGGER` BEFORE DELETE ON `departamento`
- FOR EACH ROW BEGIN
-UPDATE gps SET departamento_id = NULL  WHERE gps.departamento_id = OLD.departamento_id;
+CREATE TRIGGER `eliminarDepartamento_BD_TRIGGER` BEFORE DELETE ON `departamento` FOR EACH ROW BEGIN
+DELETE FROM gps WHERE gps.departamento_id = OLD.departamento_id;
 DELETE FROM usuarios WHERE usuarios.departamento_id = OLD.departamento_id;
 END
 $$
@@ -135,8 +122,7 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `detalle`
 --
 
-DROP TABLE IF EXISTS `detalle`;
-CREATE TABLE IF NOT EXISTS `detalle` (
+CREATE TABLE `detalle` (
   `detalle_id` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
   `enlace_id` int(11) NOT NULL
@@ -147,18 +133,12 @@ CREATE TABLE IF NOT EXISTS `detalle` (
 --
 
 INSERT INTO `detalle` (`detalle_id`, `fecha`, `enlace_id`) VALUES
-(1, '2016-09-17 06:11:02', 1),
-(2, '2016-09-14 01:12:56', 2),
-(3, '2016-09-13 11:28:34', 3),
-(4, '2016-09-12 07:01:41', 1),
-(5, '2016-09-12 06:08:01', 2),
-(6, '2016-09-12 05:55:16', 2),
-(7, '2016-09-12 05:54:50', 3);
+(1, '0000-00-00 00:00:00', 1),
+(2, '0000-00-00 00:00:00', 2);
 
 --
 -- Disparadores `detalle`
 --
-DROP TRIGGER IF EXISTS `eliminarDetalle_BD_TRIGGER`;
 DELIMITER $$
 CREATE TRIGGER `eliminarDetalle_BD_TRIGGER` BEFORE DELETE ON `detalle` FOR EACH ROW BEGIN
   DELETE FROM coordenadas WHERE coordenadas.detalle_id = OLD.detalle_id;
@@ -172,8 +152,7 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `empresa_cliente`
 --
 
-DROP TABLE IF EXISTS `empresa_cliente`;
-CREATE TABLE IF NOT EXISTS `empresa_cliente` (
+CREATE TABLE `empresa_cliente` (
   `empresa_id` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
   `telefono` varchar(20) DEFAULT NULL,
@@ -186,8 +165,8 @@ CREATE TABLE IF NOT EXISTS `empresa_cliente` (
 --
 
 INSERT INTO `empresa_cliente` (`empresa_id`, `nombre`, `telefono`, `correo`, `status`) VALUES
-(1, 'S.A de C.V.', '7471222313', 'sucorreo@gmail.com', '1'),
-(2, 'S.A. de R.L.', '7471222314', 'sucorreo2@gmail.com', '1'),
+(1, 'S.A de C.V.', '7471222313', 'sucorreo|@g.com', '1'),
+(2, 'S.A. de R.L.', '7471222314', 'sucorreo2@g.com', '1'),
 (3, 'Mi Institute', '1-364-837-7778', 'egestas.Duis@massaSuspendisseeleifend.com', '1'),
 (4, 'Natoque Penatibus Company', '1-628-458-3862', 'sagittis.lobortis.mauris@pedeSuspendissedui.com', '0'),
 (5, 'Nunc Sit Company', '1-881-485-8366', 'et.nunc@luctuslobortisClass.com', '0'),
@@ -202,7 +181,6 @@ INSERT INTO `empresa_cliente` (`empresa_id`, `nombre`, `telefono`, `correo`, `st
 --
 -- Disparadores `empresa_cliente`
 --
-DROP TRIGGER IF EXISTS `eliminarEmpresa_cliente_BD_TRIGGER`;
 DELIMITER $$
 CREATE TRIGGER `eliminarEmpresa_cliente_BD_TRIGGER` BEFORE DELETE ON `empresa_cliente` FOR EACH ROW BEGIN
 DELETE FROM departamento WHERE departamento.empresa_id = OLD.empresa_id;
@@ -216,8 +194,7 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `enlace`
 --
 
-DROP TABLE IF EXISTS `enlace`;
-CREATE TABLE IF NOT EXISTS `enlace` (
+CREATE TABLE `enlace` (
   `enlace_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `gps_id` int(11) NOT NULL
@@ -243,7 +220,6 @@ INSERT INTO `enlace` (`enlace_id`, `usuario_id`, `gps_id`) VALUES
 --
 -- Disparadores `enlace`
 --
-DROP TRIGGER IF EXISTS `eliminarEnlace_BD_TRIGGER`;
 DELIMITER $$
 CREATE TRIGGER `eliminarEnlace_BD_TRIGGER` BEFORE DELETE ON `enlace` FOR EACH ROW BEGIN
 DELETE FROM detalle WHERE detalle.enlace_id = OLD.enlace_id;
@@ -257,14 +233,13 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `gps`
 --
 
-DROP TABLE IF EXISTS `gps`;
-CREATE TABLE IF NOT EXISTS `gps` (
+CREATE TABLE `gps` (
   `gps_id` int(11) NOT NULL,
   `imei` varchar(100) DEFAULT NULL,
   `numero` varchar(25) NOT NULL,
   `descripcion` varchar(250) NOT NULL,
   `autorastreo` varchar(50) DEFAULT 'nofix' COMMENT 'este campo sera llenado con la informacion que se requiere para poder rastrear el dispositivo cada cierto tiempo y en ciertas cantidades\nfix030s5n+password\nnofix+password',
-  `departamento_id` int(11)
+  `departamento_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -272,26 +247,24 @@ CREATE TABLE IF NOT EXISTS `gps` (
 --
 
 INSERT INTO `gps` (`gps_id`, `imei`, `numero`, `descripcion`, `autorastreo`, `departamento_id`) VALUES
-(1, '000000000000000', '1-312-795-4469',  'Auto Chevy',         't005h034n123456',  1),
-(2, '100184351997449', '1-621-355-8159',  'Auto transporte',    'nofix123456',      2),
-(3, '111111111111111', '5-621-355-8159',  'sin asignacion',     'nofix',            NULL),
-(4, '216950486740097', '7471742841',      'Explorer blanca',    'nofix123456',      2),
-(5, '568026148201897', '7471421423',      'Camioneta Xtrail',   't030s008n123456',  1),
-(6, '644554683938622', '1-621-355-8159',  'sin asignacion',     'nofix123456',      2),
-(7, '812124402588233', '946737542737248', 'sin asignacion',     'notn123456',       1),
-(8, '908258133567869', '1-331-377-7778',  'Camioneta carga',    'nofix',            2),
-(9, '909181318059563', '1-449-475-1736',  'Auto departamento',  'nofix',            1),
-(10, '932643502624705', '1-276-933-4170', 'Coche transporte',   'nofix',            2),
-(11, '961823153914883', '1-411-695-8780', 'Camion foraneo',     'nofix',            1),
-(12, '974630529293790', '1-745-248-3465', 'Autobus viajes',     'nofix',            2);
+(1, '000000000000000', '7471212313', 'un gps', 'nofix', 1),
+(2, '100184351997449', '1-312-795-4469', 'dolor sit amet, consectetuer', 'nofix', 2),
+(3, '111111111111111', '7471212314', 'otro gps', 'nofix', 1),
+(4, '216950486740097', '1-621-355-8159', 'libero lacus, varius et,', 'nofix', 2),
+(5, '568026148201897', '1-257-608-0553', 'dis parturient montes, nascetur', 'nofix', 1),
+(6, '644554683938622', '1-665-503-4628', 'ornare egestas ligula. Nullam', 'nofix', 2),
+(7, '812124402588233', '1-980-983-6980', 'dui. Fusce diam nunc,', 'nofix', 1),
+(8, '908258133567869', '1-331-377-7778', 'Cras vehicula aliquet libero.', 'nofix', 2),
+(9, '909181318059563', '1-449-475-1736', 'mauris, rhoncus id, mollis', 'nofix', 1),
+(10, '932643502624705', '1-276-933-4170', 'Phasellus at augue id', 'nofix', 2),
+(11, '961823153914883', '1-411-695-8780', 'eget, volutpat ornare, facilisis', 'nofix', 1),
+(12, '974630529293790', '1-745-248-3465', 'a tortor. Nunc commodo', 'nofix', 2);
 
 --
 -- Disparadores `gps`
 --
-DROP TRIGGER IF EXISTS `eliminarGps_BD_TRIGGER`;
 DELIMITER $$
-CREATE TRIGGER `eliminarGps_BD_TRIGGER` BEFORE DELETE ON `gps`
- FOR EACH ROW BEGIN
+CREATE TRIGGER `eliminarGps_BD_TRIGGER` BEFORE DELETE ON `gps` FOR EACH ROW BEGIN
 DELETE FROM enlace WHERE enlace.gps_id = OLD.gps_id;
 END
 $$
@@ -303,14 +276,14 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
+CREATE TABLE `usuarios` (
   `usuario_id` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
   `ap_paterno` varchar(150) DEFAULT NULL,
   `ap_materno` varchar(150) DEFAULT NULL,
   `telefono` varchar(20) NOT NULL,
   `correo` varchar(150) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
   `contrase_na` varchar(200) NOT NULL,
   `departamento_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -337,8 +310,7 @@ INSERT INTO `usuarios` (`usuario_id`, `nombre`, `ap_paterno`, `ap_materno`, `tel
 -- Disparadores `usuarios`
 --
 DELIMITER $$
-CREATE TRIGGER `eliminarUsuarios_BD_TRIGGER` BEFORE DELETE ON `usuarios`
- FOR EACH ROW BEGIN
+CREATE TRIGGER `eliminarUsuarios_BD_TRIGGER` BEFORE DELETE ON `usuarios` FOR EACH ROW BEGIN
 DELETE FROM enlace WHERE enlace.usuario_id = OLD.usuario_id;
 END
 $$
